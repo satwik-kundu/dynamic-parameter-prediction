@@ -1,1 +1,1 @@
-# dynamic-parameter-prediction
+# Dynamic-parameter-prediction
