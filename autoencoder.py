@@ -6,14 +6,15 @@ from torchvision import transforms
 from torch.utils.data import random_split
 from torch import nn
 import torch.optim as optim
+import argparse
 
 data_dir = 'dataset'
 # With these commands the train and test datasets, respectively, are downloaded
 # automatically and stored in the local "data_dir" directory.
 train_dataset = torchvision.datasets.MNIST(
-    data_dir, train=True, download=False)
+    data_dir, train=True, download=True)
 test_dataset = torchvision.datasets.MNIST(
-    data_dir, train=False, download=False)
+    data_dir, train=False, download=True)
 
 
 train_transform = transforms.Compose([
@@ -136,8 +137,17 @@ class Decoder(nn.Module):
 # Set the random seed for reproducible results
 torch.manual_seed(0)
 
+parser = argparse.ArgumentParser(description="Train an autoencoder with latent dimension d.")
+parser.add_argument(
+    "-d", "--dimension",
+    type=int,
+    default=16,
+    help="latent dimension (default: 16)"
+)
+args = parser.parse_args()
+
 # Initialize the two networks
-d = 8
+d = args.dimension
 
 # model = Autoencoder(encoded_space_dim=encoded_space_dim)
 encoder = Encoder(encoded_space_dim=d, fc2_input_dim=128)

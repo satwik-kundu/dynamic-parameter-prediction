@@ -19,6 +19,7 @@ from qiskit import IBMQ
 from qiskit_ibm_provider import IBMProvider
 from qiskit_aer.noise import NoiseModel
 import matplotlib.pyplot as plt
+import argparse
 
 g = 10
 torch.manual_seed(g)
@@ -72,9 +73,9 @@ features = X.shape[-1]
 classes = int(max(y) + 1)
 
 # build qnn model
-qubit = 4
-layers = 1
-enc = 2
+qubit = 8
+layers = 2
+enc = 4
 pqc = 4
 meas = 3
 
